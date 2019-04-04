@@ -12,6 +12,12 @@ namespace Common
             Bottom = 3
         };
 
+        public class Configuration
+        {
+            public const int POST_PER_PAGE = 10;
+            public const int FIRST_NUMBER = 1;
+        }       
+
         public class GeneralOperation
         {
             public const string CREATE = "Create";

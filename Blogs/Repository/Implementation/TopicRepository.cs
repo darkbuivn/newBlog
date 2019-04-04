@@ -18,9 +18,9 @@ namespace Blog.Repository.Implementation
         //    return dbCon.Topics.Where(x => x.Id == Id).FirstOrDefault();
         //}
 
-        public IEnumerable<Topic> GetAll()
+        public IEnumerable<Topic> GetAll(int size, int skip)
         {
-            return dbCon.Topics.ToList();
+            return dbCon.Topics.Skip(skip).Take(size).ToList();
         }
 
         public IEnumerable<Topic> GetAllIncludeCategory()
@@ -89,6 +89,15 @@ namespace Blog.Repository.Implementation
         public IEnumerable<Topic> GetMoreSameCategory(Guid CategoryId)
         {
             throw new NotImplementedException();
+        }
+
+        public int Count(string searchstr = null)
+        {
+            if(string.IsNullOrWhiteSpace(searchstr))
+            {
+                return dbCon.Topics.Count();
+            }
+            return dbCon.Topics.Count(x => x.Title.Contains(searchstr) || x.ShortDesc.Contains(searchstr) || x.Content.Contains(searchstr));
         }
     }
 }

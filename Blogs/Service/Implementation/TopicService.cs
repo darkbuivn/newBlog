@@ -3,25 +3,32 @@ using System;
 using System.Collections.Generic;
 using Blog.Entities;
 using Blog.Repository.Interface;
+using Blog.Service.Business;
 
 namespace Blog.Service.Implementation
 {
     public class TopicService : ITopicService
     {
         private ITopicRepository _topicRepository;
-       
+
         public TopicService(ITopicRepository topicRepository)
         {
-            _topicRepository = topicRepository;            
+            _topicRepository = topicRepository;
         }
         public void Create(Topic topic)
         {
             _topicRepository.Create(topic);
         }
 
-        public IEnumerable<Topic> GetAll()
+        public TopicsSearchResult GetAll(int size, int skip)
         {
-            return _topicRepository.GetAll();
+            TopicsSearchResult res = new TopicsSearchResult()
+            {
+                Topics = _topicRepository.GetAll(size, skip),
+                TotalTopics = _topicRepository.Count()
+            };
+
+            return res;
         }
 
         public IEnumerable<Topic> GetByCategoryId(Guid categoryId)

@@ -8,4 +8,8 @@
 /Blogs/Entitiy/obj/Debug
 /Blogs/Common/obj/Debug
 /Blogs/Blogs/obj/Debug
-/Blogs
+/Blogs/.vs/config/applicationhost.config
+/Blogs/Common/bin/Debug
+/Blogs/Entitiy/bin/Debug
+/Blogs/Repository/bin/Debug
+/Blogs/Service/bin/Debug
