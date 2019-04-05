@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Entities;
-using Blog.Service.Business;
+using Blog.Service.Business.Topic;
 using Blog.Service.Interface;
 using Blogs.ViewModels;
 using System;

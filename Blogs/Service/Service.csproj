@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\TopicsSearchResult.cs" />
+    <Compile Include="Business\Topic\TopicsSearchResult.cs" />
     <Compile Include="Implementation\BaseService.cs" />
     <Compile Include="Implementation\BlockService.cs" />
     <Compile Include="Implementation\CategoryService.cs" />

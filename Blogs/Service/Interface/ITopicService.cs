@@ -1,5 +1,5 @@
 ﻿using Blog.Entities;
-using Blog.Service.Business;
+using Blog.Service.Business.Topic;
 using System;
 using System.Collections.Generic;
 

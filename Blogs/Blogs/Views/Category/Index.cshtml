@@ -1,7 +1,53 @@
-﻿
+﻿@model List<Blogs.ViewModels.CategoryViewModel>
 @{
     ViewBag.Title = Common.Contant.PageTitle.MANAGEMENT;
 }
 
-<h2>Index</h2>
+<div>
+    <p>
+        <h2>@Common.Contant.TextDisplay.LABEL_CATEGORY_LIST</h2>
+    </p>
+    <div class="form-inline">
+        <form action="@Url.Action("Create", "Category")" method="post">
+            <div class="form-group">
+                <input type="text" id="categoryName" class="form-control" name="categoryName" placeholder="@Common.Contant.CategoryLabel.LABEL_CAT_NAME" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Common.Contant.GeneralOperation.CREATE" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <br />
+    <div class="box">
+        <div class="box-body table-responsive no-padding">
+            <table id="tblCategory" class="table table-striped">
+                <tr class="active">
+                    <th width="60%">@Common.Contant.TextDisplay.LABEL_CATEGORY_LIST</th>
+                    <th width="40%"></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr> 
+                        <td width="75%">
+                            <small>
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </small>&nbsp;
+                            <a>
+                                <span>@item.Name</span>
+                            </a>
+                        </td>
+                        <td width="25%">
+                            <a href="@Url.Action("ChangeName", "Category")/@item.Id">
+                                <span class="btn-sm btn-info">@Common.Contant.GeneralOperation.EDIT</span>
+                            </a>
+                            <a href="@Url.Action("Delete", "Category")/@item.Id">
+                                <span class="btn-sm btn-danger">@Common.Contant.GeneralOperation.DELETE</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div><!-- /.box -->
+    </div>
+</div>
 

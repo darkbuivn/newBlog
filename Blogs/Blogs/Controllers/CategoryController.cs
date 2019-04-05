@@ -15,32 +15,45 @@ namespace Blogs.Controllers
     {
         private ICategoryService _categoryService;
 
+        public CategoryController()
+        {
+        }
+
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-        }
+            
+        }        
 
         // GET: Category           
         public ActionResult Index()
         {
-            List<CategoryViewModel> model = Mapper.Map<List<Category>, List<CategoryViewModel>>(_categoryService.GetAll().ToList());
+            IEnumerable<Category> topics = _categoryService.GetAll();
+
+            var map = Mapper.Instance;            
+
+            List<CategoryViewModel> model = new List<CategoryViewModel>();
+            foreach(var item in topics)
+            {
+                model.Add(map.Map<CategoryViewModel>(item));
+            }     
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create(string categoryname)
+        public ActionResult Create(string categoryName)
         {
-            if (!string.IsNullOrWhiteSpace(categoryname))
+            if (!string.IsNullOrWhiteSpace(categoryName))
             {
-                _categoryService.Create(categoryname);
+                _categoryService.Create(categoryName);
             }
             return RedirectToAction("Index");
         }
 
         public ActionResult ChangeName(Guid id)
         {
-            CategoryViewModel category = Mapper.Map<Category, CategoryViewModel>(_categoryService.GetById(id));
+            CategoryViewModel category = Mapper.Map<CategoryViewModel>(_categoryService.GetById(id));
             if (category != null)
             {
                 return View(category);
@@ -55,14 +68,14 @@ namespace Blogs.Controllers
             if (ModelState.IsValid)
             {
                 category.Name = HttpUtility.HtmlEncode(category.Name);
-                _categoryService.Update(Mapper.Map<CategoryViewModel, Category>(category));
+                _categoryService.Update(Mapper.Map<Category>(category));
             }    
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid id)
         {
-            CategoryViewModel category = Mapper.Map<Category, CategoryViewModel>(_categoryService.GetById(id));
+            CategoryViewModel category = Mapper.Map<CategoryViewModel>(_categoryService.GetById(id));
             return View(category);
         }
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Blog.Entities;
 using Blog.Repository.Interface;
-using Blog.Service.Business;
+using Blog.Service.Business.Topic;
 
 namespace Blog.Service.Implementation
 {
