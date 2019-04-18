@@ -8,7 +8,7 @@ namespace Blog.Repository.Interface
     {
         Category GetById(Guid id);
         List<Category> GetAll();
-        void Create(string name);
+        Category Create(string name);
         void Update(Category category);
         void Delete(Category category);
         bool IsExisting(string name);

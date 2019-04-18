@@ -15,9 +15,9 @@ namespace Blog.Service.Implementation
             _categoryRepository = categoryRepo;
         }
 
-        public void Create(string name)
+        public Category Create(string name)
         {
-            _categoryRepository.Create(name);
+           return _categoryRepository.Create(name);
         }
 
         public IEnumerable<Category> GetAll()

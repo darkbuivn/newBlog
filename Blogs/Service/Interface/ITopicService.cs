@@ -9,7 +9,7 @@ namespace Blog.Service.Interface
     {
         Topic GetById(Guid Id);
         TopicsSearchResult GetAll(int size, int skip);
-        IEnumerable<Topic> GetByCategoryId(Guid categoryId);
+        IEnumerable<Topic> GetByCategoryId(Guid categoryId, int size, int skip);
         IEnumerable<Topic> Search(string keyword);
         void Create(Topic topic);
         IEnumerable<Topic> GetNew();

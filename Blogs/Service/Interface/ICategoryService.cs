@@ -10,7 +10,7 @@ namespace Blog.Service.Interface
         Category GetById(Guid id);
         Category GetByIdIncludeTopic(int id);
         IEnumerable<Category> GetAll();
-        void Create(string name);
+        Category Create(string name);
         void Update(Category category);
     }
 }

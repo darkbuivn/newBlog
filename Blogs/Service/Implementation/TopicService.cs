@@ -31,9 +31,9 @@ namespace Blog.Service.Implementation
             return res;
         }
 
-        public IEnumerable<Topic> GetByCategoryId(Guid categoryId)
+        public IEnumerable<Topic> GetByCategoryId(Guid categoryId, int size, int skip)
         {
-            return _topicRepository.GetByCategoryId(categoryId);
+            return _topicRepository.GetByCategoryId(categoryId, size, skip);
         }
 
         public Topic GetById(Guid Id)

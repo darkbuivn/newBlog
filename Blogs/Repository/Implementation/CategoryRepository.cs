@@ -18,12 +18,17 @@ namespace Blog.Repository.Implementation
             return dbCon.Categories.ToList();
         }
 
-        public void Create(string name)
+        public Category Create(string name)
         {
-            Category category = new Category();
-            category.Name = name;
+            Category category = new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = name                
+            };           
             dbCon.Categories.Add(category);
             dbCon.SaveChanges();
+
+            return category;
         }
 
         public void Update(Category category)

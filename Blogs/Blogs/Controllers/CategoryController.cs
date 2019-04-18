@@ -2,11 +2,12 @@
 using Blog.Entities;
 using Blog.Service.Interface;
 using Blogs.ViewModels;
+using Blogs.ViewModels.ApiViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Common.Contant;
 
 namespace Blogs.Controllers
 {
@@ -42,13 +43,29 @@ namespace Blogs.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string categoryName)
+        public ApiViewModel<CategoryViewModel> Create(string categoryName)
         {
+            ApiViewModel<CategoryViewModel> model;
+
             if (!string.IsNullOrWhiteSpace(categoryName))
             {
-                _categoryService.Create(categoryName);
+                model = new ApiViewModel<CategoryViewModel>()
+                 {
+                     ApiStatusCode = StatusCode.OK,
+                     Data = Mapper.Map<CategoryViewModel>(_categoryService.Create(categoryName)),
+                     ResponseMessage = string.Empty
+                 };                
             }
-            return RedirectToAction("Index");
+            else
+            {
+                model = new ApiViewModel<CategoryViewModel>()
+                {
+                    ApiStatusCode = StatusCode.Dupplicate,
+                    Data = null,
+                    ResponseMessage = string.Format("{0} is {1}", ResponseMessageText.CATEGORY_NAME, ResponseMessageText.IS_DUPPLICATED)
+                };
+            }
+            return model; 
         }
 
         public ActionResult ChangeName(Guid id)

@@ -9,7 +9,7 @@ namespace Blog.Repository.Interface
         Topic GetById(Guid Id);
         IEnumerable<Topic> GetAll(int size, int skip);        
         IEnumerable<Topic> GetAllIncludeCategory();
-        IEnumerable<Topic> GetByCategoryId(Guid categoryId);
+        IEnumerable<Topic> GetByCategoryId(Guid categoryId, int size, int skip);
         IEnumerable<Topic> GetOrthersWithCategoryId(Guid categoryId, Guid Id);
         IEnumerable<Topic> GetNew();
         void Create(Topic topic);

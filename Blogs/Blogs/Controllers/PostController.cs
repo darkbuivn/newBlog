@@ -4,6 +4,7 @@ using Blog.Service.Business.Topic;
 using Blog.Service.Interface;
 using Blogs.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
@@ -29,16 +30,18 @@ namespace Blogs.Controllers
             return View(model);
         }
 
-        public ActionResult Browse(int? page, int categoryId = 0)
+        public ActionResult Browse(int? page, int? pageSize, Guid categoryId)
         {
-            //if (categoryId == 0)
-            //    return RedirectToAction("Index");
+            if (categoryId.Equals(Guid.Empty))
+            {
+                return RedirectToAction("Index");
+            }
 
-            //List<Topic> model = _topicService.GetAllWithCategoryIdIncludeCategory(categoryId);
+            int rows = pageSize ?? Common.Contant.Configuration.POST_PER_PAGE;
+            int pageNumber = page ?? Common.Contant.Configuration.FIRST_NUMBER;
 
-            //int pageSize = 10;
-            //int pageNumber = (page ?? 1);
-            //return View(model.ToPagedList(pageNumber, pageSize));
+            IEnumerable<Topic> topics = _topicService.GetByCategoryId(categoryId, rows, pageNumber);            
+
             return View();
         }
 

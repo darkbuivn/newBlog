@@ -12,6 +12,22 @@ namespace Common
             Bottom = 3
         };
 
+        public enum StatusCode
+        {
+            OK = 0,
+            Dupplicate = 1,
+            InvalidInput = 2,
+            ServerError = 3
+        }
+
+        public class ResponseMessageText
+        {
+            public const string CATEGORY_NAME = "Category name";
+
+            // errors
+            public const string IS_DUPPLICATED = "is dupplicated";
+        }
+
         public class Configuration
         {
             public const int POST_PER_PAGE = 10;

@@ -28,9 +28,10 @@ namespace Blog.Repository.Implementation
             return dbCon.Topics.ToList();
         }
 
-        public IEnumerable<Topic> GetByCategoryId(Guid categoryId)
+        public IEnumerable<Topic> GetByCategoryId(Guid categoryId, int size, int skip)
         {
-            return dbCon.Topics.Where(x => x.CategoryId == categoryId).ToList();
+            return dbCon.Topics.Where(x => x.CategoryId == categoryId)
+                .OrderByDescending(x => x.CreatedDate).Skip(skip).Take(size).ToList();
         }
 
         public IEnumerable<Topic> GetOrthersWithCategoryId(Guid categoryId, Guid Id)
@@ -51,9 +52,9 @@ namespace Blog.Repository.Implementation
             dbCon.SaveChanges();
         }
 
-        public IEnumerable<Topic> GetMoreSameCategory(Guid CategoryId, DateTime CreatedDate)
+        public IEnumerable<Topic> GetMoreSameCategory(Guid categoryId, DateTime createdDate)
         {
-            return dbCon.Topics.Where(x => x.CategoryId == CategoryId && x.CreatedDate > CreatedDate)
+            return dbCon.Topics.Where(x => x.CategoryId == categoryId && x.CreatedDate > createdDate)
                 .OrderByDescending(x => x.CreatedDate).Take(5).ToList();
         }
         public IEnumerable<Topic> GetMore(DateTime CreatedDate)
